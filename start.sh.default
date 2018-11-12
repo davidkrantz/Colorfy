@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cd /home/pi/Documents/Colorfy # Edit to path of project
+
+git fetch
+
+if [ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]; then
+  echo "Updating to latest version"
+  git stash # Just incase we wanted to save some change
+  git reset --hard origin/master
+fi
+
+# If necessary replace python3 with your Python 3 environment.
+# Arguments may also be added to main.py.
+sudo -E -u pi python3 main.py

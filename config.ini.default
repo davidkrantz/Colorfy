@@ -1,0 +1,7 @@
+[GPIO PINS]
+red_pin = 17
+green_pin = 22
+blue_pin = 24
+
+[CHROMECAST]
+name = Chromecast Krantz
