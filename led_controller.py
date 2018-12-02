@@ -58,23 +58,25 @@ class LEDController():
             rgb_arr[t] = curr_rgb
         return rgb_arr
 
-    def set_color(self, r, g, b):
+    def set_color(self, r, g, b, delay=0.05):
         """Sets a new color using a linear interpolation.
 
         Args:
             r (int): The new red value.
             g (int): The new green value.
             b (int): The new blue value.
+            delay (float): Delay in seconds between each interpolation
+                color.
 
         """
         r_old, g_old, b_old = self.get_color()
         rgb_list = self._linear_gradient(start=[r_old, g_old, b_old],
                                         finish=[r, g, b])
         for r, g, b in rgb_list:
-            self.pi.set_PWM_dutycycle(self.red_pin, r)
-            self.pi.set_PWM_dutycycle(self.green_pin, g)
-            self.pi.set_PWM_dutycycle(self.blue_pin, b)
-            sleep(0.05)
+                self.pi.set_PWM_dutycycle(self.red_pin, r)
+                self.pi.set_PWM_dutycycle(self.green_pin, g)
+                self.pi.set_PWM_dutycycle(self.blue_pin, b)
+                sleep(delay)
 
     def get_color(self):
         """Returns the current color.

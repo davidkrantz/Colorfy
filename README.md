@@ -4,6 +4,7 @@ A small program written in Python 3 that sets the color of your LED-strip to the
 The program uses k-means clustering to find distinct colors in the artwork and then computes a colorfulness index as defined by [Hasler and Süsstrunk (2003)](https://infoscience.epfl.ch/record/33994/files/HaslerS03.pdf) for each of the colors. The color with the highest index is then set to the LED-strip if it is greater than or equal to a given colorfulness tolerance.
 
 ## Images
+### Spotify background color
 <img src="images/rhcp.jpg">
 <p float="center">
   <img src="images/color_gradient.gif" width="481" height="271"/>
@@ -11,6 +12,13 @@ The program uses k-means clustering to find distinct colors in the artwork and t
 </p>
 <img src="images/khalid.jpg">
 <img src="images/falco.jpg">
+
+### Web app
+Simple web app built with Flask to easily switch between setting your LED-strip to the color based on your current Spotify playback, set manually using a color picker or if it should be turned off.
+<p float="center">
+  <img src="images/web_app_home.png" width="445" height="890"/>
+  <img src="images/web_app_manual.png" width="445" height="890"/>
+</p>
 
 ## Running locally
 ### Connect LED-strip to Raspberry Pi
@@ -39,9 +47,9 @@ export SPOTIPY_REDIRECT_URI=''
 ```
 
 ### Get refresh token
-1. Run the included `setup.py` script with a string as argument. This can be any string, but preferably something your will remember (for example your Spotify username to which you wish to connect the Spotify application to) since this will make it easy to find the generated refresh token if you lose it. So for example:
+1. Run the included `spotify_setup.py` script with a string as argument. This can be any string, but preferably something your will remember (for example your Spotify username to which you wish to connect the Spotify application to) since this will make it easy to find the generated refresh token if you lose it. So for example:
 ```
-python setup.py spotify_username
+python spotify_setup.py spotify_username
 ```
 
 2. A page will open. Accept the terms and then copy the URL you are redirected to into the terminal and hit enter.
@@ -88,6 +96,8 @@ The two previous steps can be automated by doing the following:
 
 2. Copy and rename `start.sh.default` to `start.sh`.
 
-3. Edit `start.sh` such that it works on your Raspberry Pi.
+3. Edit `start.sh` to your liking and such that it works on your Raspberry Pi.
 
 4. Add `@reboot . $HOME/path/to/env/var; sh /path/to/project/start.sh > /path/to/project/logs/log.txt 2>&1` to `crontab -e`. For the logging to work you will have create a directory with `mkdir logs` inside the project folder. A file called `log.txt` in `/path/to/project/logs` will then contain the logs which can be used for debugging.
+
+If you choose to run the web server, it can later be found on the address `IPTOYOURRPI:5000`.

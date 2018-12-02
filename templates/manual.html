@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/iro.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/color.js') }}"></script>
+  </head>
+  <body>
+    <button-title onclick="window.location.href='/'"><h1>Welcome to <span>Colorfy</span></h1><br></button-title>
+    <h2>Manual</h2><br>
+    <button onclick="window.location.href='/spotify'"><h2>Spotify</h2></button>
+    <button onclick="window.location.href='/manual'"><h2>Manual</h2></button>
+    <button onclick="window.location.href='/off'"><h2>Turn off</h2></button>
+    <div class="wrap">
+      <div class="half">
+        <div class="colorPicker"></div>
+      </div>
+      <div class="half readout">
+        <h3 class="title"><div id="rgb"></div></h3>
+      </div>
+    </div>
+  </body>
+</html>

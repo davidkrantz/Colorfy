@@ -119,12 +119,17 @@ class CurrentSpotifyPlayback():
             ndarray: Album artwork.
 
         Raises:
+            NoArtworkException: If album of current playback does
+            not have an artwork.
             NotPlayingAnywhereExcpetion: If Spotify is not active on
                 any device.
 
         """
         if self.data:
-            url = self.data['item']['album']['images'][1]['url']
+            try:
+                url = self.data['item']['album']['images'][1]['url']
+            except IndexError:
+                raise NoArtworkException()
             image_bytes = BytesIO(urllib.request.urlopen(url).read())
             image = np.array(Image.open(image_bytes))
             return image
@@ -162,3 +167,6 @@ class CouldNotFetchPlaybackException(Exception):
     """Raises when current playback could not be fetched."""
     pass
 
+class NoArtworkException(Exception):
+    """Raises when the current playback has no artwork."""
+    pass

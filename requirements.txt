@@ -1,8 +1,8 @@
 numpy==1.15.2
 matplotlib==2.1.2
-requests==2.20.1
 scipy==1.1.0
+Flask==1.0.2
 spotipy==2.4.4
 Pillow==5.3.0
-pigpio==1.41
-scikit_learn==0.20.0
+pigpio==1.42
+scikit_learn==0.20.1

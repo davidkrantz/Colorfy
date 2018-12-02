@@ -10,6 +10,12 @@ if [ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]; then
   git reset --hard origin/master
 fi
 
+# Comment out the one you do not wish to run.
 # If necessary replace python3 with your Python 3 environment.
-# Arguments may also be added to main.py.
-sudo -E -u pi python3 main.py
+
+# Only Spotify background color script.
+# Arguments may also be added to your liking.
+# sudo -E -u pi python3 main.py
+
+# Runs web server where you can control your LED-strip (recommended).
+sudo -E -u pi python3 app.py

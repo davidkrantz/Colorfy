@@ -4,7 +4,7 @@ import argparse
 import configparser
 from time import sleep
 from led_controller import LEDController
-from current_spotify_playback import CurrentSpotifyPlayback
+from current_spotify_playback import CurrentSpotifyPlayback, NoArtworkException
 from spotify_background_color import SpotifyBackgroundColor
 
 
@@ -47,11 +47,14 @@ def main(k, color_tol, size):
             spotify.update_current_playback()
             if spotify.connected_to_chromecast(name):
                 if spotify.new_song(old_song_id):
-                    artwork = spotify.get_artwork()
-                    background_color = SpotifyBackgroundColor(
-                        img=artwork, image_processing_size=size)
-                    r, g, b = background_color.best_color(
-                        k=k, color_tol=color_tol)
+                    try:
+                        artwork = spotify.get_artwork()
+                        background_color = SpotifyBackgroundColor(
+                            img=artwork, image_processing_size=size)
+                        r, g, b = background_color.best_color(
+                            k=k, color_tol=color_tol)
+                    except NoArtworkException:
+                        r, g, b = 255, 255, 255
                     led.set_color(r, g, b)
                     old_song_id = spotify.get_current_song_id()
             else:
