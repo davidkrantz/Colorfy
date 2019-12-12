@@ -26,6 +26,8 @@ Many different LED-strips can be used with this program. The only requirement is
 
 I used the [IKEA Dioder](https://www.ikea.com/us/en/catalog/categories/series/25230/) LED-strip which I connected to my Raspberry Pi 3 model B+ by following [this](https://dordnung.de/raspberrypi-ledstrip/) guide.
 
+For information about how to wire and set up WS281X leds you can refer to [this](https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/) guide but don't run the setup commands there as the required library is now installed by using `pip` rather than the manual way in the guide. You can also find the library used [here](https://github.com/jgarff/rpi_ws281x).
+
 ### Clone/download repository
 When the hardware is set up, you will need to [download](https://github.com/davidkrantz/Colorfy/archive/master.zip) or clone the repository, the latter can be done by typing
 ```
@@ -71,6 +73,8 @@ blue_pin = 24
 [CHROMECAST]
 name = Chromecast Krantz
 ```
+
+To use a WS281X led strip (Neopixels) you need to set the `is_active` value in `config.ini` to `True`, the `led_count` value to the number of leds in your strip and the `led_pin` to the GPIO pin you connected the data input of your led strip to. The other values under `[WS281X]` are optional and set as default.
 
 ### Run it
 1. First you will have to install the needed packages. These are listed in the `requirements.txt` file and *should* be easily installed using `pip` with

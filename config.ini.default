@@ -5,3 +5,24 @@ blue_pin = 24
 
 [CHROMECAST]
 name = Chromecast Krantz
+
+[WS281X]
+; WS281X LED strip configuration
+; True if you want to use WS281X leds, False to use default leds
+is_active = False
+; Number of leds in the led strip.
+led_count = 300
+; GPIO pin connected to the pixels (18 uses PWM!).
+led_pin = 18
+; (Optional) LED signal frequency in hertz (usually 800khz).
+led_freq_hz = 800000
+; (Optional) DMA channel to use for generating signal (try 10).
+led_dma = 10
+; (Optional) True to invert the signal (when using NPN transistor level shift).
+led_invert = False      
+; (Optional) Set to 0 for darkest and 255 for brightest.
+led_brightness = 100
+; (Optional) set to '1' for GPIOs 13, 19, 41, 45 or 53.
+led_channel = 0    
+
+
