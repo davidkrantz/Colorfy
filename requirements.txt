@@ -6,3 +6,4 @@ spotipy==2.4.4
 Pillow==5.3.0
 pigpio==1.42
 scikit_learn==0.20.1
+rpi_ws281x==4.2.2
