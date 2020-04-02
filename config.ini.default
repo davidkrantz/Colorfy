@@ -19,10 +19,8 @@ led_freq_hz = 800000
 ; (Optional) DMA channel to use for generating signal (try 10).
 led_dma = 10
 ; (Optional) True to invert the signal (when using NPN transistor level shift).
-led_invert = False      
+led_invert = False
 ; (Optional) Set to 0 for darkest and 255 for brightest.
 led_brightness = 100
 ; (Optional) set to '1' for GPIOs 13, 19, 41, 45 or 53.
-led_channel = 0    
-
-
+led_channel = 0

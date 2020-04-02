@@ -1,9 +1,8 @@
 import numpy as np
 import scipy.misc as sp
-import matplotlib
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
-from collections import Counter
+from PIL import Image
 
 
 class SpotifyBackgroundColor():
@@ -23,10 +22,8 @@ class SpotifyBackgroundColor():
         Args:
             img (ndarray): The image to analyze.
             format (str): Format of `img`, either RGB or BGR.
-            image_processing_size: (int/float/tuple): Process image or not.
-                int - Percentage of current size.
-                float - Fraction of current size.
-                tuple - Size of the output image (must be integers).
+            image_processing_size: (tuple): Process image or not.
+                tuple as (width, height) of the output image (must be integers)
 
         Raises:
             ValueError: If `format` is not RGB or BGR.
@@ -41,8 +38,8 @@ class SpotifyBackgroundColor():
                              'format supported.')
 
         if image_processing_size:
-            self.img = sp.imresize(self.img, size=image_processing_size,
-                                   interp='bilinear')
+            img = Image.fromarray(self.img)
+            self.img = np.asarray(img.resize(image_processing_size, Image.BILINEAR))
 
     def best_color(self, k=8, color_tol=10, plot=False):
         """Returns a suitable background color for the given image.
@@ -158,11 +155,11 @@ class SpotifyBackgroundColor():
         yb = np.absolute(0.5 * (r + g) - b)
 
         # Compute the mean and standard deviation of both `rg` and `yb`.
-        rb_mean, rb_std = (np.mean(rg), np.std(rg))
+        rg_mean, rg_std = (np.mean(rg), np.std(rg))
         yb_mean, yb_std = (np.mean(yb), np.std(yb))
 
         # Combine the mean and standard deviations.
-        std_root = np.sqrt((rb_std ** 2) + (yb_std ** 2))
-        mean_root = np.sqrt((rb_mean ** 2) + (yb_mean ** 2))
+        std_root = np.sqrt((rg_std ** 2) + (yb_std ** 2))
+        mean_root = np.sqrt((rg_mean ** 2) + (yb_mean ** 2))
 
         return std_root + (0.3 * mean_root)

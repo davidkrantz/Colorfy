@@ -2,12 +2,13 @@ import numpy as np
 from time import sleep
 import rpi_ws281x as neopixel
 
+
 class WS281XController():
     """Controller for WS281X LED-strips connected to a Raspberry Pi.
 
     Attributes:
         strip (Adafruit_NeoPixel): The Neopixel led strip object.
-        
+
     """
 
     def __init__(self, led_count=1, led_pin=18, led_freq_hz=800000, led_dma=10, led_invert=False, led_brightness=100, led_channel=0):
@@ -58,7 +59,7 @@ class WS281XController():
 
         Returns:
             tuple: (R, G, B).
-            
+
         """
         b =  RGBint & 255
         g = (RGBint >> 8) & 255
