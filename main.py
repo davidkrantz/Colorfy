@@ -2,15 +2,16 @@ import os
 import sys
 import argparse
 import configparser
+import config
 from time import sleep
 from current_spotify_playback import CurrentSpotifyPlayback, NoArtworkException
 from spotify_background_color import SpotifyBackgroundColor
 
 
-CLIENT_ID = os.environ.get('SPOTIPY_CLIENT_ID')
-CLIENT_SECRET = os.environ.get('SPOTIPY_CLIENT_SECRET')
-REDIRECT_URI = os.environ.get('SPOTIPY_REDIRECT_URI')
-REFRESH_TOKEN = os.environ.get('SPOTIPY_REFRESH_TOKEN')
+CLIENT_ID = config.CLIENT_ID
+CLIENT_SECRET = config.CLIENT_SECRET
+REDIRECT_URI = config.REDIRECT_URI
+REFRESH_TOKEN = config.REFRESH_TOKEN
 
 def main(k, color_tol, size):
     """Sets the LED-strip to a suitable color for the current artwork.
@@ -30,6 +31,7 @@ def main(k, color_tol, size):
     config = configparser.ConfigParser()
     config.read('config.ini')
     WS281X = config['WS281X']
+    WLED = config['WLED']
     if WS281X['is_active'] == 'True':
         from ws281x_controller import WS281XController
         LED_COUNT = int(WS281X['led_count'])
@@ -45,6 +47,10 @@ def main(k, color_tol, size):
             LED_INVERT = False
         led = WS281XController(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA,
                                LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+    elif WLED['is_active'] == 'True':
+        from wled_controller import WLEDController
+        wled_device_ip = WLED['device_ip']
+        led = WLEDController(wled_device_ip)
     else:
         from led_controller import LEDController
         GPIO_PINS = config['GPIO PINS']
