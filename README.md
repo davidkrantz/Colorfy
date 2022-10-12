@@ -76,6 +76,8 @@ name = Chromecast Krantz
 
 To use a WS281X led strip (Neopixels) you need to set the `is_active` value in `config.ini` to `True`, the `led_count` value to the number of leds in your strip and the `led_pin` to the GPIO pin you connected the data input of your led strip to. The other values under `[WS281X]` are optional and set as default.
 
+To use any [WLED](https://github.com/Aircoookie/WLED) device you just need to set `is_active` to `True` in `config.ini` and provide the IP address of that device. Currently, just one device at a time is supported.
+
 ### Run it
 1. First you will have to install the needed packages. These are listed in the `requirements.txt` file and *should* be easily installed using `pip` with
 ```

@@ -1,19 +1,28 @@
 import requests
 
 class WLEDController():
-    """Controller for WS281X LED-strips connected to a Raspberry Pi.
+    """Controller for WLED devices.
 
     Attributes:
-        strip (Adafruit_NeoPixel): The Neopixel led strip object.
+        ip (string): The IP address of the WLED device.
 
     """
 
     def __init__(self, ip):
         self.ip = ip
-        self.wledDeviceAddress = ip + "/win"
+        self.wledControlURL = ip + "/win"
+        self.wledStateURL = ip + "/json/state"
 
     def set_color(self, r, g, b):
-        requests.get(url = self.wledDeviceAddress + "&R=%d&G=%d&B=%d" % (r, g, b))
+        """Sets a new color. WLED already smoothly transitions between colors.
+
+        Args:
+            r (int): The new red value.
+            g (int): The new green value.
+            b (int): The new blue value.
+
+        """
+        requests.get(url = self.wledControlURL + "&R=%d&G=%d&B=%d" % (r, g, b))
 
     def get_color(self):
         """Returns the current color.
@@ -22,7 +31,7 @@ class WLEDController():
             tuple: (R, G, B). The current color.
 
         """
-        r = requests.get(url = self.ip + "/json/state")
+        r = requests.get(url = self.wledStateURL)
         data = r.json()
         r = data['seg'][0]['col'][0][0]
         g = data['seg'][0]['col'][0][1]

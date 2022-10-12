@@ -2,16 +2,14 @@ import os
 import sys
 import argparse
 import configparser
-import config
 from time import sleep
 from current_spotify_playback import CurrentSpotifyPlayback, NoArtworkException
 from spotify_background_color import SpotifyBackgroundColor
 
-
-CLIENT_ID = config.CLIENT_ID
-CLIENT_SECRET = config.CLIENT_SECRET
-REDIRECT_URI = config.REDIRECT_URI
-REFRESH_TOKEN = config.REFRESH_TOKEN
+CLIENT_ID = os.environ.get('SPOTIPY_CLIENT_ID')
+CLIENT_SECRET = os.environ.get('SPOTIPY_CLIENT_SECRET')
+REDIRECT_URI = os.environ.get('SPOTIPY_REDIRECT_URI')
+REFRESH_TOKEN = os.environ.get('SPOTIPY_REFRESH_TOKEN')
 
 def main(k, color_tol, size):
     """Sets the LED-strip to a suitable color for the current artwork.
