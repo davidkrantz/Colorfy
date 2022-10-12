@@ -6,6 +6,7 @@ from time import sleep
 from current_spotify_playback import CurrentSpotifyPlayback, NoArtworkException
 from spotify_background_color import SpotifyBackgroundColor
 
+
 CLIENT_ID = os.environ.get('SPOTIPY_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('SPOTIPY_CLIENT_SECRET')
 REDIRECT_URI = os.environ.get('SPOTIPY_REDIRECT_URI')
