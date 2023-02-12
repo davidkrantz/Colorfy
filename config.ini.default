@@ -24,3 +24,7 @@ led_invert = False
 led_brightness = 100
 ; (Optional) set to '1' for GPIOs 13, 19, 41, 45 or 53.
 led_channel = 0
+
+[WLED]
+is_active = False
+device_ip = http://192.168.xxx.xxx
